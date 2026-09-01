@@ -15,3 +15,9 @@ Your job:
 - Send back your PR link
 
 AI tools are fine to use. But make sure you understand what code changes you made and why. You are responsible for every change you introduce in a PR. So you should be able to explain each change clearly and confidently.
+
+
+# Run below command to check connectivity to each other containers. 
+
+# docker run --rm --network assignment-net curlimages/curl curl -v http://web:80
+# docker run --rm --network assignment-net curlimages/curl curl -v http://app:80
