@@ -33,26 +33,19 @@ resource "docker_image" "app" {
   name = "traefik/whoami:latest"
 }
 
+
+
 resource "docker_container" "app" {
   name  = "app"
   image = docker_image.app.image_id
+
   env = [
-    "UPSTREAM_HOST=172.17.0.2"
+    "UPSTREAM_HOST=web"
   ]
+
   networks_advanced {
     name = docker_network.app_net.name
   }
-  ports {
-    internal = 80
-    external = 8080
-  }
 }
 
-resource "null_resource" "deploy_manifest" {
-  triggers = {
-    always_run = timestamp()
-  }
-  provisioner "local-exec" {
-    command = "echo 'deployed at ${timestamp()}' > deploy-manifest.txt"
-  }
-}
+
